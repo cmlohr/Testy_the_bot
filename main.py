@@ -4,12 +4,20 @@ import requests
 import json
 import random
 import hello
-import time
+from datetime import datetime
+import pytz
 
-named_tuple = time.localtime() # get struct_time
-time_string = time.strftime("%H:%M", named_tuple)
 
-print(time_string)
+
+
+tz_central = pytz.timezone('America/Chicago') 
+time_central = datetime.now(tz_central)
+print("NY: ", time_central.strftime("%H:%M"))
+
+tz_London = pytz.timezone('Europe/London')
+time_London = datetime.now(tz_London)
+print("London: ", time_London.strftime("%H:%M"))
+
 
 
 my_secret = os.environ['TOKEN']
@@ -81,8 +89,40 @@ async def on_message(message):
     if message.content.startswith("$hello Testy"):
         await message.channel.send(rand_greeting())
 
-    if message.content.startswith("$time"):
-        await message.channel.send("It is " + time_string + " here")
+    if message.content.startswith("$What time is it in London?"):
+        await message.channel.send(time_London.strftime("%H:%M"))
+    if message.content.startswith("$London time?"):
+        await message.channel.send(time_London.strftime("%H:%M"))
+
+    if message.content.startswith("$London time"):
+        await message.channel.send(time_London.strftime("%H:%M"))
+
+
+    if message.content.startswith("$What time is it in New Orleans?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+
+    if message.content.startswith("$What time is it in Chicago?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+    
+    if message.content.startswith("$What time is it for you Testy?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+
+    if message.content.startswith("$Testy time?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+    if message.content.startswith("$Testy time"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+
+    if message.content.startswith("$Chicago time?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+    if message.content.startswith("$Chicago time"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+
+    if message.content.startswith("$New Orleans time?"):
+        await message.channel.send(time_central.strftime("%H:%M"))
+
+    if message.content.startswith("$New Orleans time"):
+        await message.channel.send(time_central.strftime("%H:%M"))  
+
     # if message.content.startswith('$'):
     #     await message.channel.send('Hello C')
 
